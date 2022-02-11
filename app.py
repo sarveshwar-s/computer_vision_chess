@@ -29,7 +29,7 @@ from skimage import io, transform
 
 piece_symbols = 'prbnkqPRBNKQ'
 
-def process_image(img):
+def process_image(img: str) -> np.ndarray:
     SQUARE_SIZE = 40
     downsample_size = SQUARE_SIZE*8
     square_size = SQUARE_SIZE
