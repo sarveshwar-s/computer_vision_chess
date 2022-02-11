@@ -20,7 +20,7 @@ DATA_PATH='../input/chess-positions'
 TRAIN_IMAGE_PATH=os.path.join(DATA_PATH, 'train')
 TEST_IMAGE_PATH=os.path.join(DATA_PATH, 'test')
 
-def get_image_filenames(image_path, image_type):
+def get_image_filenames(image_path:str, image_type:str)-> np.ndarray:
     if(os.path.exists(image_path)):
         return glob.glob(os.path.join(image_path, '*.'+image_type))
     return
@@ -33,11 +33,11 @@ test_size = 3000
 train = train[:train_size]
 test = test[:test_size]
 
-def fen_extraction(filename):
+def fen_extraction(filename:str):
     base = os.path.basename(filename)
     return os.path.splitext(base)[0]
 
-def onehot_from_fen(fen_name):
+def onehot_from_fen(fen_name: str)-> np.ndarray:
     eye = np.eye(13) # returns a matrix with diagonal values as 1 
     output = np.empty((0,13))
     fen = fen_name.replace("-", "")
@@ -49,7 +49,7 @@ def onehot_from_fen(fen_name):
             output = np.append(output, eye[idx].reshape((1, 13)), axis=0)
     return output
 
-def fen_from_onehot(one_hot):
+def fen_from_onehot(one_hot: np.ndarray) -> str:
     output = ''
     for j in range(8):
         for i in range(8):
